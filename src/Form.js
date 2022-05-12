@@ -1,7 +1,7 @@
 import {useState} from "react";
 
 
-function Form(props) {
+const Form = (props) => {
     const [gifSearch, setGifSearch] = useState('');
     
     const handleSubmit = (e) => {
