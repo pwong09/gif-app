@@ -7,7 +7,6 @@ const Form = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('submit button hit!');
-        // console.log(e.target); // returns form html
     }
     const handleChange = (e) => {
         const search = e.target.value;

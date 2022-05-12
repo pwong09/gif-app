@@ -1,8 +1,7 @@
 const Gif = (props) => {
-    console.log(props);
     return (
         <div className="gif-data">
-            Gif Data Goes Here
+            <img src={props.gif.data.images.downsized_large.url} alt={props.gif.data.title} />
         </div>
     )
 }
