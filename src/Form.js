@@ -1,17 +1,28 @@
-import React, {useState}
+import {useState} from "react";
+
 
 function Form(props) {
     const [gifSearch, setGifSearch] = useState('');
     
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        console.log('submit button hit!');
+        // console.log(e.target); // returns form html
+    }
+    const handleChange = (e) => {
+        const search = e.target.value;
+        setGifSearch(search);
     }
 
     return (
         <>
-            <form>
-                <input type="text" placeholder="type of gif" />
+            <form onSubmit={handleSubmit}>
+                <input 
+                    type="text" 
+                    placeholder="type of gif" 
+                    value={gifSearch} 
+                    onChange={handleChange}
+                />
                 <button>Submit</button>
             </form>
         </>
