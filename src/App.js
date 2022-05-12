@@ -11,23 +11,25 @@ function App() {
   const [gifData, setGifData] = useState('');
   const [gifSearch, setGifSearch] = useState('');
 
-  const handleSubmit = (search) => {
-    console.log('this is search', search);
-    setGifSearch(search);
-    console.log(gifSearch);
+  const handleSubmit = async (search) => {
+    const searchUrl = `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${search}&limit=1`;
+    const res = await fetch(searchUrl);
+    const data = await res.json();
+    setGifData(data.data[0].images.downsized_large.url)
   }
   const key = 'tH0qPhglUOsp3JJjyz2g6VNwczxvX2Ys';
   useEffect(() => {
-    let gifUrl = `https://api.giphy.com/v1/gifs/random?api_key=${key}`;
+    const gifUrl = `https://api.giphy.com/v1/gifs/random?api_key=${key}`;
 
     const makeApiCall = async () => {
       const res = await fetch(gifUrl);
       const data = await res.json();
-      setGifData(data);
-      console.log('gifData:', gifData)
+      console.log(data);
+      setGifData(data.data.images.downsized_large.url);
+      console.log(gifData);
     }
     makeApiCall();
-  }, [gifData])
+  }, [])
 
   return (
     <div className="App">
@@ -35,7 +37,12 @@ function App() {
       <Form handleSubmit={handleSubmit} />
       <br />
       <br />
-      <Gif gif={gifData}/>
+      {gifData !== undefined ? (<Gif gif={gifData}/>
+      ) : (
+        <h2>Get a gif from Giphy</h2>
+      )
+    }
+      
     </div>
   );
 }

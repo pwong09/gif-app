@@ -6,7 +6,8 @@ const Form = (props) => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('submit button hit!');
+        props.handleSubmit(gifSearch);
+        setGifSearch('');
     }
     const handleChange = (e) => {
         const search = e.target.value;
