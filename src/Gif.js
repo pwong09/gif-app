@@ -1,7 +1,7 @@
-const Gif = (props) => {
+const Gif = ({gif}) => {
     return (
         <div className="gif-data">
-            <img src={props.gif} alt={props.gif} />
+            <img src={gif.url} alt={gif.title} />
         </div>
     )
 }
