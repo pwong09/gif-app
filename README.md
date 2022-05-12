@@ -5,7 +5,7 @@ This project makes API calls to [Giphy](https://giphy.com).
 
 ## Components
 
-- App(parent)
+- App(parent)  
   -- Form (child)  
   -- Gif (child)  
 
