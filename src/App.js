@@ -3,18 +3,22 @@ import './App.css';
 import Form from './Form.js';
 import Gif from './Gif.js';
 
-// API call urls
-// `https://api.giphy.com/v1/gifs/random?api_key=${key}`;
-// `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${gifSearch}&limit=1`;
-
 function App() {
   const [gifData, setGifData] = useState({});
-  const [gifSearch, setGifSearch] = useState('');
   const key = 'tH0qPhglUOsp3JJjyz2g6VNwczxvX2Ys';
+  let gifUrl = `https://api.giphy.com/v1/gifs/random?api_key=${key}`;
 
+  const makeApiCall = async () => {
+    const res = await fetch(gifUrl);
+    const data = await res.json();
+    setGifData({
+      url: data.data.images.downsized_large.url,
+      title: data.data.title
+      });
+  }
   const handleSubmit = async (search) => {
-    const searchUrl = `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${search}&limit=1`;
-    const res = await fetch(searchUrl);
+    gifUrl = `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${search}&limit=1`;
+    const res = await fetch(gifUrl);
     const data = await res.json();
     setGifData({
       url: data.data[0].images.downsized_large.url,
@@ -22,16 +26,6 @@ function App() {
     })
   }
   useEffect(() => {
-    const gifUrl = `https://api.giphy.com/v1/gifs/random?api_key=${key}`;
-
-    const makeApiCall = async () => {
-      const res = await fetch(gifUrl);
-      const data = await res.json();
-      setGifData({
-        url: data.data.images.downsized_large.url,
-        title: data.data.title
-        });
-    }
     makeApiCall();
   }, [])
 
